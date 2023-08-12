@@ -111,37 +111,16 @@ textarea {
 button {
   height: 2rem;
   padding: 0 1rem;
-}
-
-.list-fill__cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem; 
-}
-.list-fill__list {
-  list-style: none;
-  padding: 0;
-}
-.list-fill__list li {
-  margin-bottom: 0.5rem;
-}
-.list-fill__list button { 
   color: rgb(var(--c-fg-rgb));
-  border: 1px solid rgb(var(--c-accent2-rgb));
+  border: 1px solid rgb(var(--c-accent1-rgb));
   border-radius: 6px;
-  transition: 300ms background, 300ms translate;
+  transition: 300ms background;
   cursor: pointer;
 }
-.list-fil__list--list button {
-  border: 1px solid rgb(var(--c-accent1-rgb));
-}
-.list-fill__list button:hover,
-.list-fill__list button:focus { 
-  background: rgb(var(--c-accent2-rgb));
-  translate: 0.5rem 0;
-}
-.list-fill__list--list button:hover,
-.list-fill__list--list button:focus { 
+button:hover,
+button:focus { 
   background: rgb(var(--c-accent1-rgb));
-  translate: -0.5rem 0;
+}
+pre {
+  line-height: 1em;
 }

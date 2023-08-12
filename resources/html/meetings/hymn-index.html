@@ -1,0 +1,1 @@
+{% ifequal forloop.counter0 0 %}Opening:{% endifequal %}{% ifequal forloop.counter0 1 %}Sacrament:{% endifequal %}{% ifequal forloop.counter0 2 %}{% ifequal meeting-hymns|length 3 %}Closing:{% else %}Rest:{% endifequal %}{% endifequal %}{% if forloop.counter0 >= 3 %}Closing:{% endif %}

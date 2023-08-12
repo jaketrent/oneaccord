@@ -9,4 +9,11 @@
   {% include "meetings/form.html" with meeting=meeting %}
   <button>Edit</button>
 </form>
+
+<div id="meetings-edit__hymns">
+  {% include "meetings/hymns.html" meeting-hymns=meeting-hymns %}
+</div>
+
+{% include "hymns/table.html" hymns=hymns meeting=meeting %}
+
 {% endblock %}

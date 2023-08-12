@@ -1,0 +1,36 @@
+<table>
+  <thead>
+    <tr>
+      <th><a href="?sort=english_num">English Num</a></th>
+      <th><a href="?sort=english_name">English Name</a></th>
+      <th><a href="?sort=spanish_num">Spanish Num</a></th>
+      <th><a href="?sort=spanish_name">Spanish Name</a></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for hymn in hymns %}
+      <tr>
+        <td>
+          {% if meeting %}
+            <form>
+              <button hx-post="/meetings/{{meeting.id}}/edit/hymns" hx-target="#meetings-edit__hymns">{{hymn.english_name}}</button>
+              <input type="hidden" name="hymn-id" value={{ hymn.id }} />
+              {% csrf-field %}
+            </form>
+          {% else %}
+            {{hymn.english_num}}
+          {% endif %}
+        </td>
+        <td>
+          {{hymn.english_name}}
+        </td>
+        <td>
+          {{hymn.spanish_num}}
+        </td>
+        <td>
+          {{hymn.spanish_name}}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

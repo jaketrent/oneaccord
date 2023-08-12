@@ -1,0 +1,14 @@
+<pre>
+{% if meeting-hymns|length > 0 %}
+English
+{% for hymn in meeting-hymns %}
+- {{ hymn.english_num }} - {{ hymn.english_name }}
+{% endfor %}
+
+Spanish
+{% for hymn in meeting-hymns %}
+- {{ hymn.spanish_num }} - {{ hymn.spanish_name }}
+{% endfor %}
+</div>
+{% endif %}
+</pre>

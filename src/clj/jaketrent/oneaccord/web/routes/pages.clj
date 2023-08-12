@@ -33,11 +33,26 @@
     (layout/render request "meetings/list.html" {:meetings meetings
                                                  :errors (:errors flash)})))
 
-(defn meetings-edit  [{:keys [flash, path-params] :as request}]
+(defn meetings-edit  [{:keys [flash, path-params query-params] :as request}]
   (let [{:keys [query-fn]} (utils/route-data request)
-        meeting (query-fn :find-meeting {:id (:meeting-id path-params)})]
+        meeting-id (:meeting-id path-params)
+        meeting (query-fn :find-meeting {:id meeting-id})
+        order-by-column (get query-params "sort" "english_num")
+        meeting-hymns (query-fn :select-meeting-hymns {:id meeting-id})
+        hymns (query-fn :select-hymns {:order_by_column order-by-column})]
     (layout/render request "meetings/edit.html" {:meeting meeting
+                                                 :meeting-hymns meeting-hymns
+                                                 :hymns hymns
                                                  :errors (:errors flash)})))
+
+(defn meeting-hymns-add  [{:keys [flash, path-params, form-params] :as request}]
+  (let [{:keys [query-fn]} (utils/route-data request)
+        {:strs [hymn-id]} form-params
+        meeting-id (:meeting-id path-params)
+        _ (query-fn :insert-meeting-hymn! {:meeting-id meeting-id :hymn-id hymn-id})
+        meeting-hymns (query-fn :select-meeting-hymns {:id meeting-id})]
+    (layout/render request "meetings/hymns.html" {:meeting-hymns meeting-hymns
+                                                  :errors (:errors flash)})))
 
 (defn meetings-create [{:keys [flash] :as request}]
   (layout/render request "meetings/create.html" {:errors (:errors flash)}))
@@ -48,6 +63,7 @@
    ["/meetings" {:get meetings-list}]
    ["/meetings/create" {:get meetings-create :post meetings/create-meeting!}]
    ["/meetings/:meeting-id/edit" {:get meetings-edit :post meetings/update-meeting!}]
+   ["/meetings/:meeting-id/edit/hymns" {:post meeting-hymns-add}]
    ["/meetings/:meeting-id/destroy" {:get meetings/delete-meeting!}]])
 
 (defn route-data [opts]
