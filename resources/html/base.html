@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create packing lists">
+  <title>oneaccord</title>
+
+  <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <nav class="nav site-nav">
+    <ul>
+      {% block sitenav %}
+        <li><a href="/">oneaccord</a></li>
+        <li><a href="/meetings" class="{% if uri = "/meetings" %}active{% endif %}">Meetings</a></li>
+        <li><a href="/hymns" class="{% if uri = "/hymns" %}active{% endif %}">Hymns</a></li>
+      {% endblock %}
+    </ul>
+  </nav>
+  {% block subnav %}
+  {% endblock %}
+  <main>
+    {% block main %}
+    {% endblock %}
+  </main>
+
+  <script src="/js/htmx.1.9.4.min.js"></script>
+</body>
+</html>

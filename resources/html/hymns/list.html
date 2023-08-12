@@ -1,0 +1,34 @@
+{% extends "hymns/base.html" %}
+
+{% block main %}
+<h1>Hymns List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>English Num</th>
+      <th>English Name</th>
+      <th>Spanish Num</th>
+      <th>Spanish Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for hymn in hymns %}
+      <tr>
+        <td>
+          {{hymn.english_num}}
+        </td>
+        <td>
+          {{hymn.english_name}}
+        </td>
+        <td>
+          {{hymn.spanish_num}}
+        </td>
+        <td>
+          {{hymn.spanish_name}}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
