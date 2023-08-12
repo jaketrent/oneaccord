@@ -7,7 +7,7 @@
 
 (defn format-line [row]
   (let [nums (re-seq #"\d+" row)
-        names (str/split row #" ?\d+ ?")
+        names (map #(str "\"" % "\"") (str/split row #" ?\d+ ?"))
         tog (map vector nums names)
         en-es (take 2 tog)
         hymn-pairs (map (partial str/join ",") en-es)
