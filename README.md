@@ -1,5 +1,14 @@
 # oneaccord
 
+## Seed Data
+
+```
+sqlite3 oneaccord_dev.db
+.mode csv
+.import /home/jaketrent/dev/oneaccord/resources/enEsHymns.csv hymn_temp
+insert into hymn (english_num,english_name,spanish_num,spanish_name) select * from hymn_temp;
+```
+
 Start a [REPL](#repls) in your editor or terminal of choice.
 
 Start the server with:
