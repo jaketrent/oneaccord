@@ -7,7 +7,8 @@
     [reitit.ring.middleware.muuntaja :as muuntaja]
     [reitit.ring.middleware.parameters :as parameters]
     [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-    [jaketrent.oneaccord.web.routes.utils :as utils]))
+    [jaketrent.oneaccord.web.routes.utils :as utils]
+    [jaketrent.oneaccord.web.controllers.meetings :as meetings]))
 
 (defn wrap-page-defaults []
   (let [error-page (layout/error-page
@@ -25,9 +26,29 @@
     (layout/render request "hymns/list.html" {:hymns hymns
                                               :errors (:errors flash)})))
 
+(defn meetings-list [{:keys [flash query-params] :as request}]
+  (let [{:keys [query-fn]} (utils/route-data request)
+        order-by-column (get query-params "sort" "english_num")
+        meetings (query-fn :select-meetings {})]
+    (layout/render request "meetings/list.html" {:meetings meetings
+                                                 :errors (:errors flash)})))
+
+(defn meetings-edit  [{:keys [flash, path-params] :as request}]
+  (let [{:keys [query-fn]} (utils/route-data request)
+        meeting (query-fn :find-meeting {:id (:meeting-id path-params)})]
+    (layout/render request "meetings/edit.html" {:meeting meeting
+                                                 :errors (:errors flash)})))
+
+(defn meetings-create [{:keys [flash] :as request}]
+  (layout/render request "meetings/create.html" {:errors (:errors flash)}))
+
 (defn page-routes [_opts]
   [["/" {:get home}]
-   ["/hymns" {:get hymns-list}]])
+   ["/hymns" {:get hymns-list}]
+   ["/meetings" {:get meetings-list}]
+   ["/meetings/create" {:get meetings-create :post meetings/create-meeting!}]
+   ["/meetings/:meeting-id/edit" {:get meetings-edit :post meetings/update-meeting!}]
+   ["/meetings/:meeting-id/destroy" {:get meetings/delete-meeting!}]])
 
 (defn route-data [opts]
   (merge

@@ -1,0 +1,12 @@
+{% extends "meetings/base.html" %}
+
+{% block main %}
+<div class="content">
+  <h2>New Meeting</h2>
+</div>
+
+<form method="POST" action="/meetings/create">
+  {% include "meetings/form.html" with meeting=meeting %}
+  <button>Create</button>
+</form>
+{% endblock %}

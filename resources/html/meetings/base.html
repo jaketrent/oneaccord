@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block subnav %}
+<nav class="nav sub-nav">
+  <ul>
+    <li><a href="/meetings" class="{% if uri = "/meetings" %}active{% endif %}">Lists Meetings</a></li>
+    <li><a href="/meetings/create" class="{% if uri = "/meetings/create" %}active{% endif %}">New Meeting</a></li>
+  </ul>
+</nav>
+{% endblock %}

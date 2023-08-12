@@ -1,0 +1,31 @@
+{% csrf-field %}
+
+<p>
+  <label>
+    Date
+    <input type="date" name="date" value="{{meeting.date}}" />
+  </label>
+</p>
+{% if errors.date %}
+  <div class="notification is-danger">{{errors.date}}</div>
+{% endif %}
+
+<p>
+  <label>
+    Name:
+    <input type="text" name="name" value="{{meeting.name}}" placeholder="Sacrament Meeting" />
+  </label>
+</p>
+{% if errors.name %}
+  <div class="notification is-danger">{{errors.name}}</div>
+{% endif %}
+
+<p>
+  <label>
+    Details:
+    <textarea class="textarea" name="details">{{meeting.details}}</textarea>
+  </label>
+</p>
+{% if errors.details %}
+  <div class="notification is-danger">{{errors.details}}</div>
+{% endif %}
