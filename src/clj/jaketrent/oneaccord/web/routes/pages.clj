@@ -1,6 +1,7 @@
 (ns jaketrent.oneaccord.web.routes.pages
   (:require
     [jaketrent.oneaccord.web.middleware.exception :as exception]
+    [clojure.tools.logging :as log]
     [jaketrent.oneaccord.web.pages.layout :as layout]
     [integrant.core :as ig]
     [reitit.ring.middleware.muuntaja :as muuntaja]
@@ -17,9 +18,11 @@
 (defn home [request]
   (layout/render request "home.html"))
 
-(defn hymns-list [{:keys [flash] :as request}]
-  (let [{:keys [query-fn]} (utils/route-data request)]
-    (layout/render request "hymns/list.html" {:hymns (query-fn :select-hymns {})
+(defn hymns-list [{:keys [flash query-params] :as request}]
+  (let [{:keys [query-fn]} (utils/route-data request)
+        order-by-column (get query-params "sort" "english_num")
+        hymns (query-fn :select-hymns {:order_by_column order-by-column})]
+    (layout/render request "hymns/list.html" {:hymns hymns
                                               :errors (:errors flash)})))
 
 (defn page-routes [_opts]
