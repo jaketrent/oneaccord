@@ -16,8 +16,15 @@
                       :title "Invalid anti-forgery token"})]
     #(wrap-anti-forgery % {:error-response error-page})))
 
-(defn home [request]
-  (layout/render request "home.html"))
+(defn home [{:keys [query-params] :as request}]
+  (let [{:keys [query-fn]} (utils/route-data request)
+        lang (get query-params "lang" "en")
+        next-meeting-hymns (query-fn :find-next-meeting-hymns {})]
+    (layout/render request "home.html" {:next-meeting-hymns next-meeting-hymns
+                                        :lang lang})))
+
+(defn admin [request]
+  (layout/render request "admin.html"))
 
 (defn hymns-list [{:keys [flash query-params] :as request}]
   (let [{:keys [query-fn]} (utils/route-data request)
@@ -59,6 +66,7 @@
 
 (defn page-routes [_opts]
   [["/" {:get home}]
+   ["/admin" {:get admin}]
    ["/hymns" {:get hymns-list}]
    ["/meetings" {:get meetings-list}]
    ["/meetings/create" {:get meetings-create :post meetings/create-meeting!}]

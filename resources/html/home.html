@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 
+{% block sitenav %}
+{% endblock %}
+
 {% block main %}
-<h1>Oneaccord</h1>
+{% with next-meeting=next-meeting-hymns|first %}
+  <div class="home">
+    <div class="home__content">
+      <header class="home__header">
+        <h1><span>Welcome to</span> {{ next-meeting.name }}</h1>
+        <div>on {{next-meeting.date}}</div>
+      </header>
+
+      <ul class="home__hymns">
+        {% for hymn in next-meeting-hymns %}
+          <li>
+            {% ifequal lang "en" %}
+              {{ hymn.english_num }} - {{ hymn.english_name }}
+            {% else %}
+              {{ hymn.spanish_num }} - {{ hymn.spanish_name }}
+            {% endifequal %}
+          </li>
+        {% endfor %}
+      </ul>
+
+      {% ifequal lang "en" %}
+        <a href="?lang=es">Show Espanol</a>
+      {% else %}
+        <a href="?lang=en">Show English</a>
+      {% endifequal %}
+    </div>
+  </div>
+{% endwith %}
 {% endblock %}

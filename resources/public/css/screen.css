@@ -124,3 +124,47 @@ button:focus {
 pre {
   line-height: 1em;
 }
+
+.home {
+  margin: 1rem 0;
+  width: calc(100vw - 2rem);
+  border: 3px solid rgb(var(--c-accent2-rgb));
+  height: calc(100vh - 2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.home a {
+  color: rgb(var(--c-accent2-rgb));
+}
+.home__content {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.home__header {
+  line-height: 2rem;
+}
+.home__header span {
+  display: block;
+  font-weight: normal;
+}
+.home__header h1 {
+  margin: 0;
+}
+.home__hymns {
+  list-style: none;
+  padding: 0;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+}
+.home__hymns li {
+  margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  .home__hymns {
+    font-size: 2rem;
+    line-height: 2.25rem;
+  }
+}

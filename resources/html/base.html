@@ -9,15 +9,15 @@
   <link href="/css/screen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <nav class="nav site-nav">
-    <ul>
-      {% block sitenav %}
+  {% block sitenav %}
+    <nav class="nav site-nav">
+      <ul>
         <li><a href="/">oneaccord</a></li>
         <li><a href="/meetings" class="{% if uri = "/meetings" %}active{% endif %}">Meetings</a></li>
         <li><a href="/hymns" class="{% if uri = "/hymns" %}active{% endif %}">Hymns</a></li>
-      {% endblock %}
-    </ul>
-  </nav>
+      </ul>
+    </nav>
+  {% endblock %}
   {% block subnav %}
   {% endblock %}
   <main>

@@ -46,3 +46,11 @@ select h.*
 from meeting_hymn mh
 join hymn h on mh.hymn_id = h.id
 where mh.meeting_id = :id;
+
+-- :name find-next-meeting-hymns :? :*
+SELECT m.*
+, h.*
+FROM meeting m
+join meeting_hymn mh on mh.meeting_id = m.id
+join hymn h on mh.hymn_id = h.id
+order by m.date;
