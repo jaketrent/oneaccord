@@ -11,6 +11,9 @@
     {% for hymn in hymns %}
       <tr>
         <td>
+          {{hymn.english_num}}
+        </td>
+        <td>
           {% if meeting %}
             <form>
               <button hx-post="/meetings/{{meeting.id}}/edit/hymns" hx-target="#meetings-edit__hymns">{{hymn.english_name}}</button>
@@ -20,9 +23,6 @@
           {% else %}
             {{hymn.english_num}}
           {% endif %}
-        </td>
-        <td>
-          {{hymn.english_name}}
         </td>
         <td>
           {{hymn.spanish_num}}

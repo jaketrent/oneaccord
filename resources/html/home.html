@@ -8,7 +8,16 @@
   <div class="home">
     <div class="home__content">
       <header class="home__header">
-        <h1><span>Welcome to</span> {{ next-meeting.name }}</h1>
+        <h1>
+          <span>
+            {% ifequal lang "en" %}
+              Welcome to
+            {% else %}
+              Bienvenido a la 
+            {% endifequal %}
+          </span> 
+          {{ next-meeting.name }}
+        </h1>
         <div>on {{next-meeting.date}}</div>
       </header>
 
