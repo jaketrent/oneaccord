@@ -53,4 +53,8 @@ SELECT m.*
 FROM meeting m
 join meeting_hymn mh on mh.meeting_id = m.id
 join hymn h on mh.hymn_id = h.id
-order by m.date;
+where m.id =
+  (SELECT m.id
+   FROM meeting m
+   order by m.date
+   limit 1)
