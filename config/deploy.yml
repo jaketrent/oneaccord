@@ -19,11 +19,11 @@ registry:
     - KAMAL_REGISTRY_PASSWORD
 
 # Inject ENV variables into containers (secrets come from .env).
-# env:
-#   clear:
-#     DB_HOST: 192.168.0.2
-#   secret:
-#     - RAILS_MASTER_KEY
+env:
+  clear:
+    PORT: 3000
+  secret:
+    - JDBC_URL
 
 # Use a different ssh user than root
 # ssh:
