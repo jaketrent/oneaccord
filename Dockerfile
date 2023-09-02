@@ -8,6 +8,8 @@ RUN clj -Sforce -T:build all
 
 FROM azul/zulu-openjdk-alpine:17
 
+RUN apk --no-cache add curl
+
 COPY --from=build /target/oneaccord-standalone.jar /oneaccord/oneaccord-standalone.jar
 
 EXPOSE $PORT
